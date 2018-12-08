@@ -76,7 +76,6 @@ class Generator extends Component {
   }
 
   render () {
-    console.log('State phone numbers', this.state.phoneNumbers)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

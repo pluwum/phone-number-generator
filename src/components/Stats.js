@@ -1,13 +1,13 @@
 import React from 'react'
-
+import { formatPhoneNumber } from '../utils'
 const Stats = ({ min, max, count }) => {
   return (
     <div>
       Stats
       <ul>
         <li>Numbers generated:{count}</li>
-        <li>Min:{min}</li>
-        <li>Max:{max}</li>
+        <li>Min:{formatPhoneNumber(min)}</li>
+        <li>Max:{formatPhoneNumber(max)}</li>
       </ul>
     </div>
   )

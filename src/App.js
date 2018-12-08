@@ -22,6 +22,25 @@ class App extends Component {
     })
   }
 
+  sortPhoneNumbers = event => {
+    event.preventDefault()
+    var order = event.target.value
+    const { phoneNumbers } = this.state
+    if (order === 'asc') {
+      this.setState({
+        phoneNumbers: phoneNumbers.sort(function (a, b) {
+          return a - b
+        })
+      })
+    } else {
+      this.setState({
+        phoneNumbers: phoneNumbers.sort(function (a, b) {
+          return b - a
+        })
+      })
+    }
+  }
+
   render () {
     const { min, max, count } = this.state
     return (
@@ -37,7 +56,10 @@ class App extends Component {
         </div>
         <div className='row'>
           <div className='col'>
-            <Results phoneNumbers={this.state.phoneNumbers} />
+            <Results
+              phoneNumbers={this.state.phoneNumbers}
+              sortPhoneNumbers={this.sortPhoneNumbers}
+            />
           </div>
         </div>
       </div>
