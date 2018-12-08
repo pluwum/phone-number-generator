@@ -6,13 +6,21 @@ import Results from './components/Results'
 import Stats from './components/Stats'
 
 class App extends Component {
+  state = {
+    phoneNumbers: []
+  }
+
+  getPhoneNumbers = results => {
+    this.setState({ phoneNumbers: results })
+  }
+
   render () {
     return (
       <div className='container'>
         <Header />
         <div className='row'>
           <div className='col'>
-            <Generator />
+            <Generator getPhoneNumbers={this.getPhoneNumbers} />
           </div>
           <div className='col'>
             <Stats />
@@ -20,7 +28,7 @@ class App extends Component {
         </div>
         <div className='row'>
           <div className='col'>
-            <Results />
+            <Results phoneNumbers={this.state}/>
           </div>
         </div>
       </div>

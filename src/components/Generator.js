@@ -7,7 +7,7 @@ const maxRetry = 5
 class Generator extends Component {
   state = {
     quantity: 0,
-    phonenumbers: []
+    phoneNumbers: []
   }
 
   generateUniqueRandomNumbers (quantity, existingPhonenumbers) {
@@ -52,7 +52,7 @@ class Generator extends Component {
     event.preventDefault()
     var { quantity } = this.state
 
-    var existingPhonenumbers = this.state.phonenumbers
+    var existingPhonenumbers = this.state.phoneNumbers
 
     var phoneNumbers = this.generateUniqueRandomNumbers(
       quantity,
@@ -60,8 +60,9 @@ class Generator extends Component {
     )
 
     this.setState({
-      phonenumbers: phoneNumbers
+      phoneNumbers: phoneNumbers
     })
+    this.props.getPhoneNumbers(phoneNumbers)
   }
 
   handleChange = event => {
@@ -70,7 +71,7 @@ class Generator extends Component {
   }
 
   render () {
-    console.log('State phone numbers', this.state.phonenumbers)
+    console.log('State phone numbers', this.state.phoneNumbers)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
