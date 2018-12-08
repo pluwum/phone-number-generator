@@ -62,7 +62,12 @@ class Generator extends Component {
     this.setState({
       phoneNumbers: phoneNumbers
     })
-    this.props.getPhoneNumbers(phoneNumbers)
+    this.props.getPhoneNumbers({
+      phoneNumbers,
+      min: Math.min(...phoneNumbers),
+      max: Math.max(...phoneNumbers),
+      count: phoneNumbers.length
+    })
   }
 
   handleChange = event => {
