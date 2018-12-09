@@ -1,5 +1,6 @@
 import React from 'react'
 import { formatPhoneNumber } from '../utils'
+
 const Stats = ({ min, max, count }) => {
   return (
     <div>

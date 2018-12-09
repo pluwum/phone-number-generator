@@ -1,67 +1,22 @@
 import React, { Component } from 'react'
+import { generateUniqueRandomNumbers } from '../utils'
 
-const limit = 999999999
-const phoneNumberLength = 10
-const phoneNumberPadding = '0'
-const maxRetry = 5
 class Generator extends Component {
   state = {
     quantity: 0,
     phoneNumbers: []
   }
 
-  generateUniqueRandomNumbers (quantity, existingPhonenumbers) {
-    var newphonenumbers = []
-    var retryCount = 0
-    var canRetry = false
-    // if we want more than we can generate
-    if (quantity > limit) {
-      quantity = limit
-    }
-
-    while (newphonenumbers.length < quantity) {
-      // Generate the random numbers
-      do {
-        var randomNum = Math.floor(Math.random() * limit)
-
-        // Lets make sure the numbers are unique
-        if (!existingPhonenumbers.includes(randomNum)) {
-          newphonenumbers.push(randomNum)
-          existingPhonenumbers.push(randomNum)
-          canRetry = false
-        } else {
-          // try a few more times If we are having trouble generating random numbers
-          canRetry = true
-          retryCount++
-        }
-      } while (canRetry && retryCount < maxRetry)
-
-      if (canRetry && retryCount >= maxRetry) {
-        // We cannot generate random numbers at this time
-        break
-      }
-
-      console.log(
-        randomNum.toString().padStart(phoneNumberLength, phoneNumberPadding)
-      )
-    }
-    return existingPhonenumbers
-  }
-
   handleSubmit = event => {
     event.preventDefault()
-    var { quantity } = this.state
+    var { quantity, phoneNumbers } = this.state
 
-    var existingPhonenumbers = this.state.phoneNumbers
-
-    var phoneNumbers = this.generateUniqueRandomNumbers(
-      quantity,
-      existingPhonenumbers
-    )
+    phoneNumbers = generateUniqueRandomNumbers(quantity, phoneNumbers)
 
     this.setState({
-      phoneNumbers: phoneNumbers
+      phoneNumbers
     })
+
     this.props.getPhoneNumbers({
       phoneNumbers,
       min: Math.min(...phoneNumbers),

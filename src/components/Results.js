@@ -1,5 +1,6 @@
 import React from 'react'
 import { formatPhoneNumber } from '../utils'
+
 const Results = ({ phoneNumbers, sortPhoneNumbers }) => (
   <div>
     Results
